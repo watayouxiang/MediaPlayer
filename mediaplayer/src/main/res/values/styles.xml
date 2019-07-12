@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="BaseSeekBar" parent="@android:style/Widget.SeekBar">
+        <item name="android:indeterminateOnly">false</item>
+        <item name="android:maxHeight">3dp</item>
+        <item name="android:minHeight">3dp</item>
+        <item name="android:paddingLeft">8dp</item>
+        <item name="android:paddingRight">8dp</item>
+        <item name="android:thumbOffset">8dp</item>
+    </style>
+
+    <style name="RedSeekBar" parent="BaseSeekBar">
+        <item name="android:progressDrawable">@drawable/seekbar_bg_red</item>
+        <item name="android:indeterminateDrawable">@drawable/seekbar_bg_red</item>
+        <item name="android:thumb">@drawable/seekbar_thumb_red</item>
+    </style>
+
+</resources>
