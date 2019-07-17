@@ -1,4 +1,4 @@
-# MediaPlayer（编码中...）
+# MediaPlayer
 
 > 媒体播放器：视频、直播、音频
 
@@ -6,7 +6,7 @@
 
 **1）第一步**
 
-implementation 'com.watayouxiang:mediaplayer:[最新版本号](https://dl.bintray.com/watayouxiang/maven/com/watayouxiang/mediaplayer/)'
+implementation 'com.watayouxiang:mediaplayer:[版本号](https://dl.bintray.com/watayouxiang/maven/com/watayouxiang/mediaplayer/)'
 
 **2） 第二步**
 
@@ -52,4 +52,4 @@ protected void onDestroy() {
 }
 ```
 
-## 待续...
+## 未完待续...

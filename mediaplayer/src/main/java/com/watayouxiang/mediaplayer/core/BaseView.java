@@ -123,14 +123,18 @@ class BaseView extends GestureView implements Lifecycle, BaseViewOperation {
     @Override
     public void setFullScreen(boolean fullScreen) {
         if (mViewSizeHelper != null) {
-            mViewSizeHelper.setViewFullScreen(fullScreen);
+            if (fullScreen) {
+                mViewSizeHelper.setFullScreen();
+            } else {
+                mViewSizeHelper.setInitSize();
+            }
         }
     }
 
     @Override
     public boolean isFullScreen() {
         if (mViewSizeHelper != null) {
-            return mViewSizeHelper.isViewFullScreen();
+            return mViewSizeHelper.isFullScreen();
         }
         return false;
     }
