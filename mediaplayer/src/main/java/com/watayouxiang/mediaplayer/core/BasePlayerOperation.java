@@ -103,11 +103,4 @@ interface BasePlayerOperation {
      * @param backgroundPlay 后台播放开关
      */
     void setBackgroundPlay(boolean backgroundPlay);
-
-    /**
-     * 获取播放器播放状态
-     *
-     * @return 播放器播放状态
-     */
-    PlayerState getPlayerState();
 }

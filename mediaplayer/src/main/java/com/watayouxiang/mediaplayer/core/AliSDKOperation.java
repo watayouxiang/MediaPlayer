@@ -34,6 +34,13 @@ interface AliSDKOperation {
     void toggle();
 
     /**
+     * 获取播放器播放状态
+     *
+     * @return 播放器播放状态
+     */
+    PlayerState getPlayerState();
+
+    /**
      * 获取视频时长
      *
      * @return 视频时长
@@ -53,4 +60,18 @@ interface AliSDKOperation {
      * @return 视频缓冲进度
      */
     long getBufferingPosition();
+
+    /**
+     * 设置自动播放开关
+     *
+     * @param autoPlay 自动播放开关
+     */
+    void setAutoPlay(boolean autoPlay);
+
+    /**
+     * 判断是否开启自动播放
+     *
+     * @return 是否开启自动播放
+     */
+    boolean isAutoPlay();
 }

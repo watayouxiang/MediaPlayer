@@ -17,7 +17,6 @@ public class BasePlayer extends AliSDK implements BasePlayerOperation {
     private boolean mGestureSeekTo;//手势调节进度开关
     private boolean mGestureToggle;//手势切换"开始/暂停"开关
     private boolean mBackgroundPlay;//台后播放开关
-    private PlayerState mPlayerState;//播放器状态
 
     // ============================================================================
     // 临时变量
@@ -28,7 +27,6 @@ public class BasePlayer extends AliSDK implements BasePlayerOperation {
     private long mStartScrollVideoDuration;//开始滚动前的视频长度
     private long mSeekPosition;//待调节的视频进度
     private boolean mResumePlay;//返回前台是否需要播放
-    private PlayerState mBeforeLoadingPlayerState;//进度加载前的播放器状态
 
     public BasePlayer(Context context) {
         super(context);
@@ -53,18 +51,6 @@ public class BasePlayer extends AliSDK implements BasePlayerOperation {
         setGestureSeekTo(true);
         setGestureToggle(true);
         setBackgroundPlay(false);
-        setPlayerState(PlayerState.Idle);
-    }
-
-    protected void setPlayerState(PlayerState playerState) {
-        if (playerState != getPlayerState()) {
-            mPlayerState = playerState;
-            onPlayerStateChange(playerState);
-        }
-    }
-
-    protected void onPlayerStateChange(PlayerState playerState) {
-        addLog("播放器状态：" + playerState);
     }
 
     protected void onOrientationChange(Orientation orientation) {
@@ -221,11 +207,6 @@ public class BasePlayer extends AliSDK implements BasePlayerOperation {
     }
 
     @Override
-    public PlayerState getPlayerState() {
-        return mPlayerState;
-    }
-
-    @Override
     protected void onStartScroll(ScrollMode mode) {
         super.onStartScroll(mode);
         if (mode == ScrollMode.VERTICAL_LEFT) {
@@ -321,53 +302,5 @@ public class BasePlayer extends AliSDK implements BasePlayerOperation {
         if (mAutoRotation) {
             setOrientation(orientation);
         }
-    }
-
-    @Override
-    protected void onPrepared() {
-        super.onPrepared();
-        setPlayerState(PlayerState.Prepared);
-    }
-
-    @Override
-    protected void onStarted() {
-        super.onStarted();
-        setPlayerState(PlayerState.Started);
-    }
-
-    @Override
-    protected void onPaused() {
-        super.onPaused();
-        setPlayerState(PlayerState.Paused);
-    }
-
-    @Override
-    protected void onLoadStart() {
-        super.onLoadStart();
-        mBeforeLoadingPlayerState = getPlayerState();
-    }
-
-    @Override
-    protected void onLoadProgress(float percent) {
-        super.onLoadProgress(percent);
-        setPlayerState(PlayerState.Loading);
-    }
-
-    @Override
-    protected void onLoadEnd() {
-        super.onLoadEnd();
-        setPlayerState(mBeforeLoadingPlayerState);
-    }
-
-    @Override
-    protected void onCompletion() {
-        super.onCompletion();
-        setPlayerState(PlayerState.Completed);
-    }
-
-    @Override
-    protected void onError(int errorCode, int errorEvent, String errorMsg) {
-        super.onError(errorCode, errorEvent, errorMsg);
-        setPlayerState(PlayerState.Error);
     }
 }

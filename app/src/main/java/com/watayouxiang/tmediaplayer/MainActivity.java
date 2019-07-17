@@ -2,6 +2,7 @@ package com.watayouxiang.tmediaplayer;
 
 import android.os.Bundle;
 import android.view.View;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.watayouxiang.demoshell.DemoActivity;
@@ -60,6 +61,18 @@ public class MainActivity extends DemoActivity {
                     @Override
                     public void onClick(View v) {
                         mPlayer.setCoverUrl("https://upload.nb350.com/cover/20190715/541_1529160.jpg");
+                    }
+                })
+                .addClick("设置自动播放开关", new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        if (mPlayer.isAutoPlay()) {
+                            mPlayer.setAutoPlay(false);
+                            ((TextView) v).setText("自动播放（关闭）");
+                        } else {
+                            mPlayer.setAutoPlay(true);
+                            ((TextView) v).setText("自动播放（开启）");
+                        }
                     }
                 })
                 .addSection("调试操作")

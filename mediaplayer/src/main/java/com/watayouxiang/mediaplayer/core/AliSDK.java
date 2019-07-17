@@ -13,8 +13,19 @@ import com.aliyun.vodplayer.media.IAliyunVodPlayer;
 import java.util.Locale;
 
 class AliSDK extends BaseView implements AliSDKOperation {
-    private Integer mReplaySuccessSeekToPosition;//重播成功后再调节进度（临时变量）
     private AliyunVodPlayer mAliyunVodPlayer;//阿里播放器
+
+    // ============================================================================
+    // 临时变量
+    // ============================================================================
+    private Integer mReplaySuccessSeekToPosition;//重播成功后再调节进度
+    private PlayerState mBeforeLoadingPlayerState;//进度加载前的播放器状态
+
+    // ============================================================================
+    // 需要默认值
+    // ============================================================================
+    private PlayerState mPlayerState;//播放器状态
+    private boolean mAutoPlay;//自动播放开关
 
     public AliSDK(Context context) {
         super(context);
@@ -40,6 +51,13 @@ class AliSDK extends BaseView implements AliSDKOperation {
         addSurfaceViewCallback(surfaceView, mAliyunVodPlayer);
         //添加到本视图
         addView(surfaceView, new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT));
+    }
+
+    @Override
+    protected void onInitEvent(Context context) {
+        super.onInitEvent(context);
+        setAutoPlay(false);//默认关闭自动播放
+        setPlayerState(PlayerState.Idle);//初始化播放器状态
     }
 
     private void addSurfaceViewCallback(SurfaceView surfaceView, final AliyunVodPlayer aliyunVodPlayer) {
@@ -169,36 +187,57 @@ class AliSDK extends BaseView implements AliSDKOperation {
         });
     }
 
+    private void setPlayerState(PlayerState playerState) {
+        if (playerState != getPlayerState()) {
+            mPlayerState = playerState;
+            onPlayerStateChange(playerState);
+        }
+    }
+
+    protected void onPlayerStateChange(PlayerState playerState) {
+        addLog("播放器状态：" + playerState);
+    }
+
     protected void onFirstFrameStart() {
         addLog("onFirstFrameStart");
     }
 
     protected void onPrepared() {
         addLog("onPrepared");
+        setPlayerState(PlayerState.Prepared);
+        if (isAutoPlay()) {
+            start();
+        }
     }
 
     protected void onStarted() {
         addLog("onStarted");
+        setPlayerState(PlayerState.Started);
     }
 
     protected void onPaused() {
         addLog("onPaused");
+        setPlayerState(PlayerState.Paused);
     }
 
     protected void onLoadStart() {
         addLog("onLoadStart");
+        mBeforeLoadingPlayerState = getPlayerState();
     }
 
     protected void onLoadProgress(float percent) {
         addLog("onLoadProgress: percent=" + percent);
+        setPlayerState(PlayerState.Loading);
     }
 
     protected void onLoadEnd() {
         addLog("onLoadEnd");
+        setPlayerState(mBeforeLoadingPlayerState);
     }
 
     protected void onCompletion() {
         addLog("onCompletion");
+        setPlayerState(PlayerState.Completed);
     }
 
     protected void onError(int errorCode, int errorEvent, String errorMsg) {
@@ -208,6 +247,7 @@ class AliSDK extends BaseView implements AliSDKOperation {
         addInfo(String.format(Locale.getDefault(),
                 "onError: errorCode=%d, errorEvent=%d, errorMsg=%s",
                 errorCode, errorEvent, errorMsg));
+        setPlayerState(PlayerState.Error);
     }
 
     @Override
@@ -292,6 +332,11 @@ class AliSDK extends BaseView implements AliSDKOperation {
     }
 
     @Override
+    public PlayerState getPlayerState() {
+        return mPlayerState;
+    }
+
+    @Override
     public long getDuration() {
         return mAliyunVodPlayer.getDuration();
     }
@@ -304,6 +349,16 @@ class AliSDK extends BaseView implements AliSDKOperation {
     @Override
     public long getBufferingPosition() {
         return mAliyunVodPlayer.getBufferingPosition();
+    }
+
+    @Override
+    public void setAutoPlay(boolean autoPlay) {
+        mAutoPlay = autoPlay;
+    }
+
+    @Override
+    public boolean isAutoPlay() {
+        return mAutoPlay;
     }
 
     public void showAliSDKState() {
