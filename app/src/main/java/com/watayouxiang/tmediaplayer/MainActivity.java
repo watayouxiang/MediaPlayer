@@ -63,16 +63,13 @@ public class MainActivity extends DemoActivity {
                         mPlayer.setCoverUrl("https://upload.nb350.com/cover/20190715/541_1529160.jpg");
                     }
                 })
-                .addClick("设置自动播放开关", new View.OnClickListener() {
+                .addClick("设置自动播放", new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        if (mPlayer.isAutoPlay()) {
-                            mPlayer.setAutoPlay(false);
-                            ((TextView) v).setText("自动播放（关闭）");
-                        } else {
-                            mPlayer.setAutoPlay(true);
-                            ((TextView) v).setText("自动播放（开启）");
-                        }
+                        mPlayer.setAutoPlay(!mPlayer.isAutoPlay());
+                        ((TextView) v).setText(mPlayer.isAutoPlay() ?
+                                "[点击事件] 自动播放（开启）" :
+                                "[点击事件] 自动播放（关闭）");
                     }
                 })
                 .addSection("调试操作")
