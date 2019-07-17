@@ -75,7 +75,7 @@ class AliSDK extends BaseView implements AliSDKOperation {
         aliyunVodPlayer.setOnFirstFrameStartListener(new IAliyunVodPlayer.OnFirstFrameStartListener() {
             @Override
             public void onFirstFrameStart() {
-                addLog("onFirstFrameStart");
+                player.onFirstFrameStart();
             }
         });
         //播放器出错监听
@@ -167,6 +167,10 @@ class AliSDK extends BaseView implements AliSDKOperation {
                 addLog("onTimeExpiredError");
             }
         });
+    }
+
+    protected void onFirstFrameStart() {
+        addLog("onFirstFrameStart");
     }
 
     protected void onPrepared() {

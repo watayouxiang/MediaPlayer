@@ -34,22 +34,32 @@ public class MainActivity extends DemoActivity {
                 .addClick("视频1", new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        mPlayer.setTitle("视频1");
                         mPlayer.prepare(mVideoUrl);
                     }
                 })
                 .addClick("视频2", new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        mPlayer.setTitle("视频2");
                         mPlayer.prepare(mVideoUrl2);
                     }
                 })
                 .addClick("视频3", new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        mPlayer.setTitle("视频3");
                         mPlayer.prepare(mVideoUrl3);
+                    }
+                })
+                .addSection("播放器操作")
+                .addClick("设置标题", new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        mPlayer.setTitle("这是一个视频标题");
+                    }
+                })
+                .addClick("设置封面", new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        mPlayer.setCoverUrl("https://upload.nb350.com/cover/20190715/541_1529160.jpg");
                     }
                 })
                 .addSection("调试操作")

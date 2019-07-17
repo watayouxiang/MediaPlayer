@@ -25,6 +25,7 @@ public class VideoPlayer extends BasePlayer implements VideoPlayerOperation {
     private ControllerView mControllerView;
     private LoadingView mLoadingView;
     private GestureView mGestureView;
+    private CoverView mCoverView;
     private TikHandler m1000TikHandler;
 
     public VideoPlayer(Context context) {
@@ -60,6 +61,8 @@ public class VideoPlayer extends BasePlayer implements VideoPlayerOperation {
     @Override
     protected void onInitView(Context context) {
         super.onInitView(context);
+        mCoverView = initCoverView(context);
+        addChildView(mCoverView);
         mControllerView = initControllerView(context);
         addChildView(mControllerView);
         mLoadingView = initLoadingView(context);
@@ -81,6 +84,9 @@ public class VideoPlayer extends BasePlayer implements VideoPlayerOperation {
         if (mGestureView != null) {
             mGestureView = null;
         }
+        if (mCoverView != null) {
+            mCoverView = null;
+        }
         if (m1000TikHandler != null) {
             m1000TikHandler.releaseRes();
             m1000TikHandler = null;
@@ -91,6 +97,12 @@ public class VideoPlayer extends BasePlayer implements VideoPlayerOperation {
         LayoutParams params = new LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
         params.addRule(CENTER_IN_PARENT);
         addView(view, params);
+    }
+
+    private CoverView initCoverView(Context context) {
+        CoverView coverView = new CoverView(context);
+        coverView.setVisibility(GONE);
+        return coverView;
     }
 
     private GestureView initGestureView(Context context) {
@@ -236,7 +248,22 @@ public class VideoPlayer extends BasePlayer implements VideoPlayerOperation {
     }
 
     @Override
+    protected void onFirstFrameStart() {
+        super.onFirstFrameStart();
+        mCoverView.setVisibility(GONE);
+    }
+
+    @Override
     public void setTitle(String title) {
         mControllerView.setTitle(title);
+    }
+
+    @Override
+    public void setCoverUrl(String coverUrl) {
+        PlayerState playerState = getPlayerState();
+        if (playerState == PlayerState.Idle || playerState == PlayerState.Prepared) {
+            mCoverView.setCoverUrl(coverUrl);
+            mCoverView.setVisibility(VISIBLE);
+        }
     }
 }
