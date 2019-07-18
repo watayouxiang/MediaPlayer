@@ -12,8 +12,26 @@ implementation 'com.watayouxiang:mediaplayer:[版本号](https://dl.bintray.com/
 
 添加三个本地aar包：[AlivcPlayer-3.4.6.aar、AlivcReporter-1.2.aar、AliyunVodPlayer-3.4.6.aar](./mediaplayer/libs)
 
+## 2、基础播放器
 
-## 2、视频播放器
+> BasePlayer功能：
+> 
+> - 自动切换 “半屏/全屏”
+> - 滑动手势调节 “进度/音量/亮度”、双击手势 “播放/暂停”
+> - 进入后台暂停播放，返回前台继续播放
+> - 自动播放，循环播放，断网重连
+> - 等...
+
+如需自定义播放器样式，继承BasePlayer即可。
+
+## 3、视频播放器
+
+> VideoPlayer样式：
+> 
+> - 操控栏
+> - 视频封面
+> - 手势操作提示
+> - 视频加载进度提示
 
 ```
 <com.watayouxiang.mediaplayer.video.VideoPlayer
@@ -25,8 +43,17 @@ implementation 'com.watayouxiang:mediaplayer:[版本号](https://dl.bintray.com/
 protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     private VideoPlayer mPlayer = findViewById(R.id.player);
-	mPlayer.setTitle("视频1");
+    //准备视频源
 	mPlayer.prepare("http://player.alicdn.com/video/aliyunmedia.mp4");
+	//设置标题
+	mPlayer.setTitle("这是一个视频标题");
+	//设置封面
+	mPlayer.setCoverUrl("https://upload.nb350.com/cover/20190715/541_1529160.jpg");
+	//设置自动播放
+	mPlayer.setAutoPlay(true);
+	//设置循环播放
+	mPlayer.setCirclePlay(true);
+	//...
 }
 
 
@@ -51,5 +78,7 @@ protected void onDestroy() {
     }
 }
 ```
+
+
 
 ## 未完待续...

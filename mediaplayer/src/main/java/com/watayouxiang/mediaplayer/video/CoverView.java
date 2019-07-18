@@ -11,7 +11,7 @@ import androidx.appcompat.widget.AppCompatImageView;
 import com.watayouxiang.mediaplayer.R;
 import com.watayouxiang.mediaplayer.utils.ImageLoader;
 
-public class CoverView extends RelativeLayout {
+class CoverView extends RelativeLayout {
     private AppCompatImageView iv_cover;
 
     public CoverView(Context context) {

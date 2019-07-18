@@ -80,7 +80,7 @@ class BaseView extends GestureView implements Lifecycle, BaseViewOperation {
 
     protected void onSizeChange(int width, int height) {
         addLog(String.format(Locale.getDefault(), "onSizeChange: W%d, H%d", width, height));
-        addInfo(String.format(Locale.getDefault(), "onSizeChange: W%d, H%d", width, height));
+        //addInfo(String.format(Locale.getDefault(), "onSizeChange: W%d, H%d", width, height));
     }
 
     protected void onNetworkChange(NetworkState networkState) {

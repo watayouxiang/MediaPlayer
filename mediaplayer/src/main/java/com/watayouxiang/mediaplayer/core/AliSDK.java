@@ -12,6 +12,10 @@ import com.aliyun.vodplayer.media.IAliyunVodPlayer;
 
 import java.util.Locale;
 
+/**
+ * Android播放器SDK：
+ * https://help.aliyun.com/document_detail/94328.html?spm=a2c4g.11186623.6.1008.7cc3192bdNAaae
+ */
 class AliSDK extends BaseView implements AliSDKOperation {
     private AliyunVodPlayer mAliyunVodPlayer;//阿里播放器
 
