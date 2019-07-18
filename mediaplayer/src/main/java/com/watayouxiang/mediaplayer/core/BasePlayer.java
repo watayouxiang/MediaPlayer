@@ -107,7 +107,7 @@ public class BasePlayer extends AliSDK implements BasePlayerOperation {
     @Override
     public void onPause() {
         super.onPause();
-        if (!isBackgroundPlay() && getPlayerState() == PlayerState.Started) {
+        if (!isBackgroundPlay() && isPlaying()) {
             pause();
             mResumePlay = true;
         }

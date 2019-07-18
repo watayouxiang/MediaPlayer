@@ -41,6 +41,13 @@ interface AliSDKOperation {
     PlayerState getPlayerState();
 
     /**
+     * 判断是否处于播放状态
+     *
+     * @return 是否处于播放状态
+     */
+    boolean isPlaying();
+
+    /**
      * 获取视频时长
      *
      * @return 视频时长
@@ -74,4 +81,18 @@ interface AliSDKOperation {
      * @return 是否开启自动播放
      */
     boolean isAutoPlay();
+
+    /**
+     * 设置循环播放开关
+     *
+     * @param circlePlay 循环播放开关
+     */
+    void setCirclePlay(boolean circlePlay);
+
+    /**
+     * 判断是否开启循环播放
+     *
+     * @return 是否开启循环播放
+     */
+    boolean isCirclePlay();
 }

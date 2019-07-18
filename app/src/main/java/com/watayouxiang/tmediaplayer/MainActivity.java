@@ -7,7 +7,6 @@ import android.widget.Toast;
 
 import com.watayouxiang.demoshell.DemoActivity;
 import com.watayouxiang.demoshell.ListData;
-import com.watayouxiang.mediaplayer.core.PlayerState;
 import com.watayouxiang.mediaplayer.video.VideoPlayer;
 
 public class MainActivity extends DemoActivity {
@@ -72,6 +71,15 @@ public class MainActivity extends DemoActivity {
                                 "[点击事件] 自动播放（关闭）");
                     }
                 })
+                .addClick("设置循环播放", new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        mPlayer.setCirclePlay(!mPlayer.isCirclePlay());
+                        ((TextView) v).setText(mPlayer.isCirclePlay() ?
+                                "[点击事件] 循环播放（开启）" :
+                                "[点击事件] 循环播放（关闭）");
+                    }
+                })
                 .addSection("调试操作")
                 .addClick("显示播放器信息弹窗", new View.OnClickListener() {
                     @Override
@@ -82,8 +90,7 @@ public class MainActivity extends DemoActivity {
                 .addClick("获取播放器状态", new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        PlayerState playerState = mPlayer.getPlayerState();
-                        showToast(playerState);
+                        showToast(mPlayer.getPlayerState());
                     }
                 })
                 .addClick("显示AliSDK状态", new View.OnClickListener() {

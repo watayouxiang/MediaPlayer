@@ -26,6 +26,7 @@ class AliSDK extends BaseView implements AliSDKOperation {
     // ============================================================================
     private PlayerState mPlayerState;//播放器状态
     private boolean mAutoPlay;//自动播放开关
+    private boolean mCirclePlay;//循环播放开关
 
     public AliSDK(Context context) {
         super(context);
@@ -56,8 +57,10 @@ class AliSDK extends BaseView implements AliSDKOperation {
     @Override
     protected void onInitEvent(Context context) {
         super.onInitEvent(context);
-        setAutoPlay(false);//默认关闭自动播放
-        setPlayerState(PlayerState.Idle);//初始化播放器状态
+        //初始化配置
+        setPlayerState(PlayerState.Idle);
+        setAutoPlay(false);
+        setCirclePlay(false);
     }
 
     private void addSurfaceViewCallback(SurfaceView surfaceView, final AliyunVodPlayer aliyunVodPlayer) {
@@ -238,6 +241,9 @@ class AliSDK extends BaseView implements AliSDKOperation {
     protected void onCompletion() {
         addLog("onCompletion");
         setPlayerState(PlayerState.Completed);
+        if (isCirclePlay()) {
+            start();
+        }
     }
 
     protected void onError(int errorCode, int errorEvent, String errorMsg) {
@@ -323,8 +329,7 @@ class AliSDK extends BaseView implements AliSDKOperation {
 
     @Override
     public void toggle() {
-        IAliyunVodPlayer.PlayerState playerState = mAliyunVodPlayer.getPlayerState();
-        if (playerState == IAliyunVodPlayer.PlayerState.Started) {
+        if (isPlaying()) {
             pause();
         } else {
             start();
@@ -334,6 +339,11 @@ class AliSDK extends BaseView implements AliSDKOperation {
     @Override
     public PlayerState getPlayerState() {
         return mPlayerState;
+    }
+
+    @Override
+    public boolean isPlaying() {
+        return getPlayerState() == PlayerState.Started;
     }
 
     @Override
@@ -359,6 +369,16 @@ class AliSDK extends BaseView implements AliSDKOperation {
     @Override
     public boolean isAutoPlay() {
         return mAutoPlay;
+    }
+
+    @Override
+    public void setCirclePlay(boolean circlePlay) {
+        mCirclePlay = circlePlay;
+    }
+
+    @Override
+    public boolean isCirclePlay() {
+        return mCirclePlay;
     }
 
     public void showAliSDKState() {
