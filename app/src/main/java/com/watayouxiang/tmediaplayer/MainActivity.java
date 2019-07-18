@@ -36,6 +36,7 @@ public class MainActivity extends DemoActivity {
         mPlayer.setCirclePlay(true);
         //设置视频源
         mPlayer.prepare(mVideoUrl3);
+        //...
     }
 
     @Override

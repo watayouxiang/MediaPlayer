@@ -2,15 +2,13 @@
 
 > 媒体播放器：视频、直播、音频
 
+<img src="./Screenshot.jpg" width="300" >
+
 ## 1、引入
 
-**1）第一步**
+1. implementation 'com.watayouxiang:mediaplayer:[版本号](https://dl.bintray.com/watayouxiang/maven/com/watayouxiang/mediaplayer/)'
 
-implementation 'com.watayouxiang:mediaplayer:[版本号](https://dl.bintray.com/watayouxiang/maven/com/watayouxiang/mediaplayer/)'
-
-**2） 第二步**
-
-添加三个本地aar包：[AlivcPlayer-3.4.6.aar、AlivcReporter-1.2.aar、AliyunVodPlayer-3.4.6.aar](./mediaplayer/libs)
+2. 添加三个本地aar包：[AlivcPlayer-3.4.6.aar、AlivcReporter-1.2.aar、AliyunVodPlayer-3.4.6.aar](./mediaplayer/libs)
 
 ## 2、基础播放器
 
@@ -51,7 +49,7 @@ protected void onCreate(Bundle savedInstanceState) {
     mPlayer.setCirclePlay(true);
     //设置视频源
     mPlayer.prepare(mVideoUrl3);
-	...
+    //...
 }
 
 
@@ -79,4 +77,4 @@ protected void onDestroy() {
 
 
 
-## 未完待续...
+## 待续...
