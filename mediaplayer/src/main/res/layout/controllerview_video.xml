@@ -36,6 +36,7 @@
         app:layout_constrainedWidth="true"
         app:layout_constraintBottom_toBottomOf="@+id/iv_back"
         app:layout_constraintEnd_toStartOf="@+id/iv_share"
+        app:layout_constraintHorizontal_bias="0"
         app:layout_constraintStart_toEndOf="@+id/iv_back"
         app:layout_constraintTop_toTopOf="@+id/iv_back"
         app:layout_goneMarginEnd="44dp" />

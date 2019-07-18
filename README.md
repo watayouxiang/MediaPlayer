@@ -42,18 +42,16 @@ implementation 'com.watayouxiang:mediaplayer:[版本号](https://dl.bintray.com/
 @Override
 protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
-    private VideoPlayer mPlayer = findViewById(R.id.player);
-    //准备视频源
-	mPlayer.prepare("http://player.alicdn.com/video/aliyunmedia.mp4");
-	//设置标题
-	mPlayer.setTitle("这是一个视频标题");
-	//设置封面
-	mPlayer.setCoverUrl("https://upload.nb350.com/cover/20190715/541_1529160.jpg");
-	//设置自动播放
-	mPlayer.setAutoPlay(true);
-	//设置循环播放
-	mPlayer.setCirclePlay(true);
-	//...
+    mPlayer = findViewById(R.id.player);
+    //设置标题
+    mPlayer.setTitle("这是一个视频标题");
+    //开启自动播放
+    mPlayer.setAutoPlay(true);
+    //开启循环播放
+    mPlayer.setCirclePlay(true);
+    //设置视频源
+    mPlayer.prepare(mVideoUrl3);
+	...
 }
 
 

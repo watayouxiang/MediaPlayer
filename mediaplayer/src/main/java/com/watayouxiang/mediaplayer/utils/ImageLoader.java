@@ -54,6 +54,7 @@ public class ImageLoader {
             bitmap = BitmapFactory.decodeStream(is);
             is.close();
         } catch (Exception e) {
+            //e.printStackTrace();
         } finally {
             try {
                 if (is != null) {

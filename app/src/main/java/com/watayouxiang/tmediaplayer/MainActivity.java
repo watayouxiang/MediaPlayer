@@ -11,10 +11,13 @@ import com.watayouxiang.mediaplayer.video.VideoPlayer;
 
 public class MainActivity extends DemoActivity {
     private VideoPlayer mPlayer;
-    private String mVideoUrl = "http://player.alicdn.com/video/aliyunmedia.mp4";
-    private String mVideoUrl2 = "https://nb-live-record.oss-cn-shanghai.aliyuncs.com/video/2018-05-31/Ax8826WfNm.mp4";
-    private String mVideoUrl3 = "https://nb-live-record.oss-cn-shanghai.aliyuncs.com/video/2018-06-04/Md8PRFWxbY.mp4";
-    private String mLiveUrl = "rtmp://live.hkstv.hk.lxdns.com/live/hks";
+    //测试视频来源：https://www.jianshu.com/p/5c001dce85b8
+    private String mVideoUrl = "http://vfx.mtime.cn/Video/2019/03/12/mp4/190312083533415853.mp4";
+    private String mVideoUrl2 = "http://vfx.mtime.cn/Video/2019/03/14/mp4/190314223540373995.mp4";
+    private String mVideoUrl3 = "http://vfx.mtime.cn/Video/2019/03/09/mp4/190309153658147087.mp4";
+    private String mVideoUrl4 = "http://vfx.mtime.cn/Video/2019/03/18/mp4/190318214226685784.mp4";
+    //封面图来源：https://movie.douban.com/subject/26848645/
+    private String mCoverUrl = "https://img3.doubanio.com/view/photo/l/public/p2543046082.jpg";
 
     @Override
     protected int getHolderViewId() {
@@ -25,41 +28,55 @@ public class MainActivity extends DemoActivity {
     protected void initView(Bundle savedInstanceState) {
         super.initView(savedInstanceState);
         mPlayer = findViewById(R.id.player);
+        //设置标题
+        mPlayer.setTitle("这是一个视频标题");
+        //开启自动播放
+        mPlayer.setAutoPlay(true);
+        //开启循环播放
+        mPlayer.setCirclePlay(true);
+        //设置视频源
+        mPlayer.prepare(mVideoUrl3);
     }
 
     @Override
     protected ListData getListData() {
         return new ListData()
                 .addSection("准备视频源")
-                .addClick("视频1", new View.OnClickListener() {
+                .addClick("测试视频1", new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
                         mPlayer.prepare(mVideoUrl);
                     }
                 })
-                .addClick("视频2", new View.OnClickListener() {
+                .addClick("测试视频2", new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
                         mPlayer.prepare(mVideoUrl2);
                     }
                 })
-                .addClick("视频3", new View.OnClickListener() {
+                .addClick("测试视频3", new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
                         mPlayer.prepare(mVideoUrl3);
+                    }
+                })
+                .addClick("测试视频4", new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        mPlayer.prepare(mVideoUrl4);
                     }
                 })
                 .addSection("播放器操作")
                 .addClick("设置标题", new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        mPlayer.setTitle("这是一个视频标题");
+                        mPlayer.setTitle("将夜 预告片1：永夜将至版 (中文字幕)");
                     }
                 })
                 .addClick("设置封面", new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        mPlayer.setCoverUrl("https://upload.nb350.com/cover/20190715/541_1529160.jpg");
+                        mPlayer.setCoverUrl(mCoverUrl);
                     }
                 })
                 .addClick("设置自动播放", new View.OnClickListener() {
